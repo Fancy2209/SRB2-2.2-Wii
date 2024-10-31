@@ -139,7 +139,7 @@ if("${SRB2_CONFIG_SYSTEM_LIBRARIES}")
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES NintendoWii)
-#find_package(CURL REQUIRED)
+	find_package(CURL REQUIRED)
 endif()
 
 
