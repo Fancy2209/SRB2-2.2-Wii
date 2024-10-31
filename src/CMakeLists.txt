@@ -240,6 +240,7 @@ endif()
 if(${CMAKE_SYSTEM_NAME} MATCHES NintendoWii)
 	# Causes link errors, so disable for now
 	target_compile_definitions(SRB2SDL2 PRIVATE -DNONET)
+	ogc_create_dol(SRB2SDL2)
 endif()
 
 # Compiler warnings configuration
