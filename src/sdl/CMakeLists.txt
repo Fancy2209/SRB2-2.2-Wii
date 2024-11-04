@@ -63,7 +63,9 @@ if(NOT "${SRB2_CONFIG_SYSTEM_LIBRARIES}" AND NOT "${SRB2_CONFIG_SHARED_INTERNAL_
 else()
 	target_link_libraries(SRB2SDL2 PRIVATE SDL2::SDL2 SDL2_mixer::SDL2_mixer)
 endif()
-
+if("${CMAKE_SYSTEM_NAME}" MATCHES NintendoWii)
+	target_link_libraries(SRB2SDL2 PRIVATE SDL2::SDL2main)
+endif()
 if("${CMAKE_SYSTEM_NAME}" MATCHES Linux)
 	target_link_libraries(SRB2SDL2 PRIVATE m rt)
 endif()

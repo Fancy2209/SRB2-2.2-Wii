@@ -162,8 +162,10 @@ const char *wadDefaultPaths[] = {
 #elif defined (_WIN32)
 	"c:\\games\\srb2",
 	"\\games\\srb2",
-#elif defined(__WIIU__)
-        "fs:/vol/external01/SRB2",
+#elif defined(__wii__)
+    "sd:/SRB2",
+	"usb:/SRB2",
+
 #endif
 	NULL
 };
@@ -1009,6 +1011,9 @@ void I_JoyScale2(void)
 // Cheat to get the device index for a joystick handle
 INT32 I_GetJoystickDeviceIndex(SDL_Joystick *dev)
 {
+	while (SDL_NumJoysticks() == 0) {
+        SDL_PumpEvents();
+    }
 	INT32 i, count = SDL_NumJoysticks();
 
 	for (i = 0; dev && i < count; i++)
@@ -1227,7 +1232,10 @@ static int joy_open(int joyindex)
 
 	if (joyindex <= 0)
 		return -1;
-
+	
+	while (SDL_NumJoysticks() == 0) {
+        SDL_PumpEvents();
+    }
 	num_joy = SDL_NumJoysticks();
 
 	if (num_joy == 0)
@@ -1499,7 +1507,10 @@ static int joy_open2(int joyindex)
 
 	if (joyindex <= 0)
 		return -1;
-
+	
+	while (SDL_NumJoysticks() == 0) {
+        SDL_PumpEvents();
+    }
 	num_joy = SDL_NumJoysticks();
 
 	if (num_joy == 0)
@@ -1686,7 +1697,12 @@ INT32 I_NumJoys(void)
 {
 	INT32 numjoy = 0;
 	if (SDL_WasInit(SDL_INIT_JOYSTICK) == SDL_INIT_JOYSTICK)
+	{
+		while (SDL_NumJoysticks() == 0) {
+        SDL_PumpEvents();
+    	}
 		numjoy = SDL_NumJoysticks();
+	}
 	return numjoy;
 }
 
