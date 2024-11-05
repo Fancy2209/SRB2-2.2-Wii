@@ -22,9 +22,7 @@
 #ifdef __wii__
 #define PF_INET6 24
 #define AF_INET6 PF_INET6
-#endif
-
-#ifdef __wii__
+#undef HAVE_IPV6
 #define NO_IPV6
 #endif
 
@@ -168,7 +166,7 @@
 	typedef SOCKET SOCKET_TYPE;
 	#define ERRSOCKET (SOCKET_ERROR)
 #else
-	#if defined (__unix__) || defined (__APPLE__) || defined (__HAIKU__)
+	#if defined (__unix__) || defined (__APPLE__) || defined (__HAIKU__) || defined (__wii__)
 		typedef int SOCKET_TYPE;
 	#else
 		typedef unsigned long SOCKET_TYPE;

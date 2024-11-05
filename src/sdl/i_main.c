@@ -31,6 +31,10 @@
 #include <errno.h>
 #endif
 
+#ifdef __wii__
+#include <debug.h>
+#endif
+
 #include "time.h" // For log timestamps
 
 #ifdef HAVE_SDL
@@ -84,6 +88,10 @@ static void InitLogging(void)
 	const char *link;
 #endif
 
+	#ifdef __wii__
+	setenv("HOME", "SRB2", 1);
+	DEBUG_Init(GDBSTUB_DEVICE_USB, 1);
+	#endif
 	logdir = D_Home();
 
 	my_time = time(NULL);

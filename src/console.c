@@ -35,6 +35,10 @@
 #include "filesrch.h"
 #include "m_misc.h"
 
+#ifdef __wii__
+	#include <gccore.h>
+#endif
+
 #ifdef _WINDOWS
 #include "win32/win_main.h"
 #endif
@@ -1497,9 +1501,11 @@ void CONS_Printf(const char *fmt, ...)
 		txt = malloc(8192);
 
 	va_start(argptr, fmt);
-	vsprintf(txt, fmt, argptr);
+	const int size = vsprintf(txt, fmt, argptr);
 	va_end(argptr);
-
+	#ifdef __wii__
+	usb_sendbuffer_safe(1, txt, size);
+	#endif
 	// echo console prints to log file
 	DEBFILE(txt);
 

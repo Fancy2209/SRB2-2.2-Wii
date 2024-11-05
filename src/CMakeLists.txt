@@ -238,7 +238,7 @@ if (WUT)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES NintendoWii)
-	target_link_libraries(SRB2SDL2 PRIVATE mbedtls mbedcrypto mbedx509 wiisocket ogc wiisocket)
+	target_link_libraries(SRB2SDL2 PRIVATE mbedtls mbedcrypto mbedx509 wiisocket ogc db wiisocket)
 	target_compile_definitions(SRB2SDL2 PRIVATE -DSDLMAIN)
 	ogc_create_dol(SRB2SDL2)
 endif()

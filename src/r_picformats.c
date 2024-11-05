@@ -51,7 +51,11 @@
 #endif
 #endif
 
-static unsigned char imgbuf[1<<20];
+#ifdef __wii__
+static unsigned char *imgbuf;
+#else
+static unsigned char imgbuf[1<<22];
+#endif
 
 #ifdef PICTURE_PNG_USELOOKUP
 static colorlookup_t png_colorlookup;
@@ -116,6 +120,11 @@ void *Picture_PatchConvert(
 	INT16 inwidth, INT16 inheight, INT16 inleftoffset, INT16 intopoffset,
 	pictureflags_t flags)
 {
+	#ifdef __wii__
+	if (imgbuf == NULL) {
+    	imgbuf = malloc(1<<22);
+  	}
+	#endif
 	INT16 x, y;
 	UINT8 *img;
 	UINT8 *imgptr = imgbuf;
