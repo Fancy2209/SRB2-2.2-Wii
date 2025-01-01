@@ -52,9 +52,10 @@
 #endif
 
 #ifdef __wii__
-static unsigned char *imgbuf;
+// static unsigned char *imgbuf;
+static unsigned char imgbuf[1<<20];
 #else
-static unsigned char imgbuf[1<<22];
+static unsigned char imgbuf[1<<26];
 #endif
 
 #ifdef PICTURE_PNG_USELOOKUP
@@ -120,11 +121,11 @@ void *Picture_PatchConvert(
 	INT16 inwidth, INT16 inheight, INT16 inleftoffset, INT16 intopoffset,
 	pictureflags_t flags)
 {
-	#ifdef __wii__
+	/*#ifdef __wii__
 	if (imgbuf == NULL) {
     	imgbuf = malloc(1<<22);
   	}
-	#endif
+	#endif*/
 	INT16 x, y;
 	UINT8 *img;
 	UINT8 *imgptr = imgbuf;

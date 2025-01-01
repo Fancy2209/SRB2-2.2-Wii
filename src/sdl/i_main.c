@@ -32,6 +32,7 @@
 #endif
 
 #ifdef __wii__
+#include <wiisocket.h>
 #include <debug.h>
 #endif
 
@@ -89,8 +90,11 @@ static void InitLogging(void)
 #endif
 
 	#ifdef __wii__
-	setenv("HOME", "SRB2", 1);
-	DEBUG_Init(GDBSTUB_DEVICE_USB, 1);
+	setenv("HOME", "/SRB2", 1);
+	//DEBUG_Init(GDBSTUB_DEVICE_USB, 1);
+	wiisocket_init();
+	wiisocket_init();
+	wiisocket_init();
 	#endif
 	logdir = D_Home();
 

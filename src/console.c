@@ -1504,7 +1504,7 @@ void CONS_Printf(const char *fmt, ...)
 	const int size = vsprintf(txt, fmt, argptr);
 	va_end(argptr);
 	#ifdef __wii__
-	usb_sendbuffer_safe(1, txt, size);
+	//usb_sendbuffer_safe(1, txt, size);
 	#endif
 	// echo console prints to log file
 	DEBFILE(txt);
